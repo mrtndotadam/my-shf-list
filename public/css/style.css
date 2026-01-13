@@ -1,0 +1,193 @@
+#search input {
+    width: 1300px;
+    height: 50px;
+    border: 1px solid #ccc;
+    padding: 8px;
+    font-size: 15px;
+    transition: width 0.2s;
+    border-radius: 50px;
+}
+
+::-webkit-scrollbar {
+    height: 10px;
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: rgb(167, 167, 167); 
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: rgb(233, 233, 233);
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    
+}
+
+a {
+    text-decoration: none;
+    color: black;
+    margin: 0 10px;
+}
+
+h3, p {
+    color: rgb(58, 58, 58);
+}
+
+.main-form button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    background-color: rgb(86, 192, 86);
+    cursor: pointer;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.main-form button.cancel-button {
+    background-color: rgb(250, 77, 77);
+}
+
+.main-form button.cancel-button:hover {
+    background-color: rgb(200, 50, 50);
+}
+
+.main-form button p {
+    margin: 0;
+    padding: 0;
+    color: white;
+    font-size: 18px;
+}
+
+.main-form input {
+    height: 30px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    padding: 5px;
+    font-size: 16px;
+}
+
+.main-form button:hover {
+    background-color: rgb(70, 170, 70);
+}
+
+.form_div {
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+}
+
+.form_div a {
+    color: blue;
+    text-decoration: underline;
+}
+
+#header_div {
+    background-color: rgb(255, 255, 255); 
+    /* margin: auto; */
+    /* width: 1300px; */
+    border: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    height: 70px;
+    position: sticky;
+    top: 0;
+}
+
+#header_div strong {
+    color: rgb(58, 58, 58);
+}
+
+#main_div {
+    width: 1300px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+#figure-card {
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 auto;
+    border: 1px solid rgb(180, 180, 180);
+    margin: 10px;
+    width: 270px;
+    text-align: center;
+    border-radius: 20px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#figure-div {
+    display: flex;
+    /* flex-direction: row; */
+    /* flex-wrap: nowrap; */
+    overflow-x: auto;
+    margin-bottom: 10px;
+}
+
+#figure-card p {
+    margin: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+#figure-card img {
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+}
+
+#figure-buttons {
+    margin-top: auto;
+    display: flex;
+}
+
+#figure-buttons form, #figure-buttons button {
+    flex: 1;
+    height: 80px;
+    width: 100%;
+}
+
+#figure-buttons button {
+    border: 1px solid #ccc;
+}
+
+#figure-buttons button:disabled {
+    background-color: rgb(200, 200, 200);
+}
+
+#figure-buttons button:disabled img {
+    opacity: 0.5;
+}
+
+#figure-buttons button:hover:not(:disabled) {
+    background-color: rgb(150, 150, 150);
+    cursor: pointer;
+}
+
+#figure-buttons img {
+    box-shadow: none;
+    border-radius: 0px;
+    width: 30px;
+    height: 30px;
+}

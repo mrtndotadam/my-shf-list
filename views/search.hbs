@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Search | My SHF List </title>
+    <link rel="stylesheet" type="text/css" media="all" href="/css/style.css">
+</head>
+<body>
+    <div id="header_div" style="margin-bottom: 10px;">
+        <div id="title_div" style="margin-right: 10px; margin-left: 25px;">
+            <h2>My SHF List</h2>
+        </div>
+        <div id="nav_div">
+            {{#if user}}
+                <a href="/browse"><strong>Browse</strong></a>
+                {{#if user.isAdmin}}
+                     <a href="/figureForm"><strong >Create Entry</strong></a>
+                {{else}}
+                     <a href="/lists"><strong>My Lists</strong></a>
+                {{/if}}
+            {{else}}
+                <a href="/browse"><strong>Browse</strong></a> 
+                <a href="/login"><strong></strong>My Lists</strong></a> 
+            {{/if}}
+        </div>
+        {{#if user}}
+            <a href="/profile"><strong>Profile</strong></a> 
+            <div style="margin-left: auto; margin-right: 25px">
+                <form action="/logout" method="POST" style="display: inline;">
+                    <button type="submit" style="background: none; border: none; padding: 0; font: inherit; cursor: pointer;"><strong>Logout</strong></button>
+                </form>
+            </div>
+        {{else}}
+            <div style="margin-left: auto; margin-right: 25px;">
+                <a href="/login"><strong>Login</strong></a> 
+                <a href="/signup"><strong></strong>Sign Up</strong></a>
+            </div>
+        {{/if}}
+    </div>
+    <div id="main_div">
+        <div id="search" style="display: flex; justify-content: center; margin: auto; margin-top: 10px;">
+            <form action="/search" method="GET" style="">
+                <input type="search" name="q" placeholder="Search..." value="{{query}}">
+            </form>
+        </div>
+        <h2 style="color: rgb(58, 58, 58);"> Results for "{{query}}": ({{searchResults.length}}) </h2>
+        <div id="figure-div">
+            {{#each searchResults}}
+                <div id="figure-card">
+                    <img src="{{imageURL}}" alt="{{name}}" style="width: 100%; height: auto;">
+                    <p><strong>{{name}}</strong></p>
+                    <p><strong>IP:</strong> {{titleIP}}</p>
+                    <p><strong>Release Year:</strong> {{releaseYear}}</p>
+
+                    {{#if @root.user}}
+                        {{#if @root.user.isAdmin}}
+                        <div id="figure-buttons">
+                            {{!-- Edit entry --}}
+                            <form action="/figureForm/{{_id}}" method="GET">
+                                <button type="submit" style="width: 100%; border-bottom-left-radius: 20px;"> Edit Entry </button>
+                            </form>
+                            {{!-- Delete entry --}}
+                            <form action="/deleteEntry/{{_id}}" method="POST">
+                                <button type="submit" style="width: 100%; border-bottom-right-radius: 20px;"> Delete Entry </button>
+                            </form>
+                        </div>
+                        {{else}}
+                            <div id="figure-buttons">
+                                {{!-- Add to collection/wishlist --}}
+                                {{#if isInCollection}}
+                                    <button type="submit" style="border-bottom-left-radius: 20px;" title="Already in Collection" disabled>
+                                        <img src="/images/collection.png" alt="Collection Icon">
+                                    </button>
+                                    <button type="submit" style="border-bottom-right-radius: 20px;" title="Already in Collection" disabled>
+                                        <img src="/images/wishlist.png" alt="Wishlist Icon">
+                                    </button>
+                                {{else if isInWishlist}}
+                                    <form action="/moveToCollection/{{_id}}" method="POST">
+                                        <button type="submit" style="border-bottom-left-radius: 20px;" title="Move to Collection">
+                                            <img src="/images/collection.png" alt="Collection Icon">
+                                        </button>
+                                    </form>
+                                    <form action="/addToWishlist/{{_id}}" method="POST">
+                                        <button type="submit" style="border-bottom-right-radius: 20px;" title="Already in Wishlist" disabled>
+                                            <img src="/images/wishlist.png" alt="Wishlist Icon">
+                                        </button>
+                                    </form>
+                                {{else}}
+                                    <form action="/addToCollection/{{_id}}" method="POST">
+                                        <button type="submit" style="border-bottom-left-radius: 20px;" title="Add to Collection">
+                                            <img src="/images/collection.png" alt="Collection Icon">
+                                        </button>
+                                    </form>
+                                    <form action="/addToWishlist/{{_id}}" method="POST">
+                                        <button type="submit" style="border-bottom-right-radius: 20px;" title="Add to Wishlist">
+                                            <img src="/images/wishlist.png" alt="Wishlist Icon">
+                                        </button>
+                                    </form>
+                                {{/if}}
+                            </div>
+                        {{/if}}
+                    {{/if}}
+                </div>
+            {{/each}}
+        </div>
+
+    </div>
+</body>
+</html>

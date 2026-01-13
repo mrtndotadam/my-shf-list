@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {{#if (eq action "changeEmail")}}
+        <title> Edit Email | MY SHF List </title>
+    {{else if (eq action "changePassword")}}
+        <title> Edit Password | MY SHF List </title>
+    {{else if (eq action "deleteUser")}}
+        <title> Delete Account | MY SHF List </title>
+    {{/if}}
+	<link rel="stylesheet" type="text/css" media="all" href="/css/style.css">
+</head>
+<body>
+    <div id="header_div">
+        <div id="title_div" style="margin-left: 25px;">
+            <h2>My SHF List</h2>
+        </div>
+    </div>
+	<div class="form_div" style="margin-top: 20px;">
+        {{#if (eq action "changeEmail")}}
+            <form class="main-form" action="/changeEmail" method="post">
+
+                <div style="display: flex; flex-direction: column;">
+                    <label for="old_email"><p> Old Email </p></label>
+                    <input id="old_email" name="old_email" type="email" placeholder="old_you@example.com" required>
+                    <label for="new_email"><p> New Email </p></label>
+                    <input id="new_email" name="new_email" type="email" placeholder="new_you@example.com" required>
+                    <label for="password"><p> Password </p></label>
+                    <input id="password" name="password" type="password" placeholder="Enter your password" required>
+                </div>
+
+                <button type="submit" style="width: 100%;"><p> Change Email </p></button>
+                <button class="cancel-button" type="button" onclick="location.href='/profile'" style="width: 100%; margin-top: 10px;"><p> Cancel </p></button>
+            </form>
+        {{else if (eq action "changePassword")}}
+            <form class="main-form" action="/changePassword" method="post">
+
+                <div style="display: flex; flex-direction: column;">
+                    <label for="old_password"><p> Old Password </p></label>
+                    <input id="old_password" name="old_password" type="password" placeholder="Enter your old password" required>
+                    <label for="new_password"><p> New Password </p></label>
+                    <input id="new_password" name="new_password" type="password" placeholder="Enter your new password" required>
+                </div>
+                <button type="submit" style="width: 100%;"><p> Change Password </p></button>
+                <button class="cancel-button" type="button" onclick="location.href='/profile'" style="width: 100%; margin-top: 10px;"><p> Cancel </p></button>
+            </form>
+        {{else if (eq action "deleteUser")}}
+            <form class="main-form" action="/deleteUser" method="post">
+
+                <div style="display: flex; flex-direction: column;">
+                    <p> Are you sure you want to delete your account? This action cannot be undone. </p>
+                    <label for="old_password"><p> Enter password to confirm account deletion </p></label>
+                    <input id="old_password" name="old_password" type="password" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" style="width: 100%;"><p> Delete Account </p></button>
+                <button class="cancel-button" type="button" onclick="location.href='/profile'" style="width: 100%; margin-top: 10px;"><p> Cancel </p></button>
+            </form>
+        {{/if}}
+	</div>
+</body>
+</html>

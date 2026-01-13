@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {{#if figure}}
+        <title> Edit Entry  My SHF List </title>
+    {{else}}
+        <title> Create Entry  My SHF List </title>
+    {{/if}}
+    <link rel="stylesheet" type="text/css" media="all" href="/css/style.css">
+</head>
+<body>
+    <div id="header_div">
+        <div id="title_div" style="margin-left: 25px;">
+            <h2>My SHF List</h2>
+        </div>
+    </div>
+    <div class="form_div" style="margin-top: 20px">
+        {{#if figure}}
+            <p> To edit an entry, update the following details: </p>
+            <form class="main-form" action="/editEntry/{{figure._id}}" method="post">
+
+                <div style="display: flex; flex-direction: column;">
+                    <label for="titleIP"><p> IP (e.g., "Naruto", "One Piece", "Dragon Ball") </p></label>
+                    <input id="titleIP" name="titleIP" type="text" value="{{figure.titleIP}}" list="ipOptions" required>
+                    <datalist id="ipOptions">
+                        {{#each existingIPs}}
+                            <option value="{{this}}"></option>
+                        {{/each}}
+                    </datalist>
+                </div>
+
+                <div style="display: flex; flex-direction: column;">
+                    <label for="name"><p> Name (e.g., "Super Saiyan 4 Son Goku") </p></label>
+                    <input id="name" name="name" type="text" value="{{figure.name}}" required>
+                </div>
+
+                <div style="display: flex; flex-direction: column;">
+                    <label for="releaseYear"><p> Release Year </p></label>
+                    <input id="releaseYear" name="releaseYear" type="number" value="{{figure.releaseYear}}" required>
+                </div>
+
+                <div style="display: flex; flex-direction: column;">
+                    <label for="imageURL"><p> Image URL </p></label>
+                    <input id="imageURL" name="imageURL" type="text" value="{{figure.imageURL}}" required>
+                </div>
+
+                <button type="submit"><p> Save Changes </p></button>
+                <button class="cancel-button" type="button" onclick="location.href='/browse'" style=" margin-top: 10px;"><p> Cancel </p></button>
+            </form>
+        {{else}}
+            <p> To create an entry, enter the following detials: </p>
+            <form class="main-form" action="/createEntry" method="post">
+
+                <div style="display: flex; flex-direction: column;">
+                    <label for="titleIP"><p> IP (e.g., "Naruto", "One Piece", "Dragon Ball") </p></label>
+                    <input id="titleIP" name="titleIP" type="text" placeholder="Enter IP" list="ipOptions" required>
+                    <datalist id="ipOptions">
+                        {{#each existingIPs}}
+                            <option value="{{this}}"></option>
+                        {{/each}}
+                    </datalist>
+                </div>
+
+                <div style="display: flex; flex-direction: column;">
+                    <label for="name"><p> Name (e.g., "Super Saiyan 4 Son Goku") </p></label>
+                    <input id="name" name="name" type="text" placeholder="Enter Name"  required>
+                </div>
+
+                <div style="display: flex; flex-direction: column;">
+                    <label for="releaseYear"><p> Release Year </p></label>
+                    <input id="releaseYear" name="releaseYear" type="number" placeholder="Enter Release Year"  required>
+                </div>
+
+                <div style="display: flex; flex-direction: column;">
+                    <label for="imageURL"><p> Image URL </p></label>
+                    <input id="imageURL" name="imageURL" type="text" placeholder="Enter Image URL"  required>
+                </div>
+
+                <button type="submit"><p> Create Entry </p></button>
+                <button class="cancel-button" type="button" onclick="location.href='/browse'" style="margin-top: 10px;"><p> Cancel </p></button>
+            </form>
+        {{/if}}
+    </div>
+</body>
+</html>

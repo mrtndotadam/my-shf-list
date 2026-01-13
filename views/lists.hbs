@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> My Lists | My SHF Lists </title>
+    <link rel="stylesheet" type="text/css" media="all" href="/css/style.css">
+</head>
+<body>
+    <div id="header_div" style="margin-bottom: 10px;">
+        <div id="title_div" style="margin-right: 10px; margin-left: 25px;">
+            <h2>My SHF List</h2>
+        </div>
+        <div id="nav_div">
+            {{#if user}}
+                <a href="/browse"><strong>Browse</strong></a>
+                {{#if user.isAdmin}}
+                     <a href="/figureForm"><strong >Create Entry</strong></a>
+                {{else}}
+                     <a href="/lists"><strong>My Lists</strong></a>
+                {{/if}}
+            {{else}}
+                <a href="/browse"><strong>Browse</strong></a> 
+                <a href="/login"><strong></strong>My Lists</strong></a> 
+            {{/if}}
+        </div>
+        {{#if user}}
+            <a href="/profile"><strong>Profile</strong></a> 
+            <div style="margin-left: auto; margin-right: 25px">
+                <form action="/logout" method="POST" style="display: inline;">
+                    <button type="submit" style="background: none; border: none; padding: 0; font: inherit; cursor: pointer;"><strong>Logout</strong></button>
+                </form>
+            </div>
+        {{else}}
+            <div style="margin-left: auto; margin-right: 25px;">
+                <a href="/login"><strong>Login</strong></a> 
+                <a href="/signup"><strong></strong>Sign Up</strong></a>
+            </div>
+        {{/if}}
+    </div>
+    <div id="main_div">
+        <h2 style="color: rgb(58, 58, 58);"> My Collection ({{collection.length}})</h2>
+        <div id="figure-div">
+            {{#each collection}}
+                <div id="figure-card">
+                    <img src="{{imageURL}}" alt="{{name}}" style="width: 100%; height: auto;">
+                    <p><strong>{{name}}</strong></p>
+                    <p><strong>IP:</strong> {{titleIP}}</p>
+                    <p><strong>Release Year:</strong> {{releaseYear}}</p>
+
+                    <div id="figure-buttons">
+                        <form action="/removeFromCollection/{{_id}}" method="POST">
+                            <button type="submit" style="width: 100%; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px;" title="Remove from Collection">
+                                <img src="/images/trash.png" alt="Trash Icon">
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+        <h2 style="color: rgb(58, 58, 58);"> My Wishlist ({{wishlist.length}})</h2>
+        <div id="figure-div">
+            {{#each wishlist}}
+                <div id="figure-card"> 
+                    <img src="{{imageURL}}" alt="{{name}}" style="width: 100%; height: auto;">
+                    <p><strong>{{name}}</strong></p>
+                    <p><strong>IP:</strong> {{titleIP}}</p>
+                    <p><strong>Release Year:</strong> {{releaseYear}}</p>
+
+                    <div id="figure-buttons">
+                        <form action="/moveToCollection/{{_id}}" method="POST">
+                            <button type="submit" style="width: 100%; border-bottom-left-radius: 20px;" title="Move to Collection">
+                                <img src="/images/collection.png" alt="Collection Icon">
+                            </button>
+                        </form>
+                        <form action="/removeFromWishlist/{{_id}}" method="POST">
+                            <button type="submit" style="width: 100%; border-bottom-right-radius: 20px;" title="Remove from Wishlist">
+                                <img src="/images/trash.png" alt="Trash Icon">
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+    </div>
+</body>
+</html>
